@@ -17,10 +17,8 @@ def main():
     db.commit()
 
     cur.execute("SELECT * FROM temp")
-    row = cur.fetchone()
-    while row:
+    for row in cur:
         print(row)
-        row = cur.fetchone()
 
     cur.execute("DROP TABLE IF EXISTS temp")
     cur.close()
