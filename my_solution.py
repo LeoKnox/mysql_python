@@ -30,7 +30,7 @@ def main():
     cur.executemany(insert_statement, values)
 
     cur.execute("SELECT * FROM temp")
-    cur_lite.execute("CREATE TABLE IF NOT EXISTS temp ( a TEXT, b TEXT, c TEXT )")
+    cur_lite.execute("CREATE TABLE IF NOT EXISTS copytest ( a TEXT, b TEXT, c TEXT )")
     for row in cur:
         cur_lite.execute("INSERT INTO temp VALUES (row[0], row[1], row[2])")
         db_lite.commit()
@@ -39,7 +39,7 @@ def main():
     cur.close()
     db.close()
 
-    cur_lite.execute("INSERT INTO temp VALUES ('seven', 'eight', 'nine')")
+    cur_lite.execute("INSERT INTO copytest VALUES (?, ?, ?)")
     db_lite.commit()
 
 if __name__ == "__main__":
