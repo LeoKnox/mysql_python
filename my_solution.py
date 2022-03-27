@@ -30,12 +30,14 @@ def main():
     for row in cur:
         print(row)
 
-    db = sqlite3.connect(":memory:")
-    cur = db.cursor()
+    db_lite = sqlite3.connect(":memory:")
+    cur_list = db_lite.cursor()
 
     cur.close()
     db.close()
 
+    cur_lite.execute("INSERT INTO temp VALUES ('seven', 'eight', 'nine')")
+    db_lite.commit()
 
 if __name__ == "__main__":
     main()
