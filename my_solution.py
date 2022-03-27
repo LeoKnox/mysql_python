@@ -9,6 +9,9 @@ def main():
     db = mysql.connect(host=MY_HOST, user=MY_USER, password=MY_PASS, database='scratch')
     cur = db.cursor(prepared=True)
 
+    db_lite = sqlite3.connect(":memory:")
+    cur_list = db_lite.cursor()
+
     cur.execute("DROP TABLE IF EXISTS temp")
     cur.execute("CREATE TABLE IF NOT EXISTS temp ( a TEXT, b TEXT, c TEXT )")
 
@@ -27,11 +30,11 @@ def main():
     cur.executemany(insert_statement, values)
 
     cur.execute("SELECT * FROM temp")
+    cur_lite.execute("CREATE TABLE IF NOT EXISTS temp ( a TEXT, b TEXT, c TEXT )")
     for row in cur:
+        cur_lite.execute("INSERT INTO temp VALUES ('seven', 'eight', 'nine')")
+        db_lite.commit()
         print(row)
-
-    db_lite = sqlite3.connect(":memory:")
-    cur_list = db_lite.cursor()
 
     cur.close()
     db.close()
