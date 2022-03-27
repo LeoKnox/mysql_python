@@ -25,7 +25,11 @@ def main():
     )
     insert_statement = "INSERT INTO temp VALUES (?, ?, ?)"
     cur.executemany(insert_statement, values)
-    
+
+    cur.execute("SELECT * FROM temp")
+    for row in cur:
+        print(row)
+
     db = sqlite3.connect(":memory:")
     cur = db.cursor()
 
