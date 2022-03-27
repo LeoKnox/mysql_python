@@ -1,9 +1,9 @@
 import sqlite3
 import mysql.connector as mysql
 
-MY_HOST = 'pluto.local'
-MY_USER = 'appuser'
-MY_PASS = 'Spartacus'
+MY_HOST = 'localhost'
+MY_USER = ''
+MY_PASS = ''
 
 def main():
     db = mysql.connect(host=MY_HOST, user=MY_USER, password=MY_PASS, database='scratch')
